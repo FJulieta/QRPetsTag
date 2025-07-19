@@ -1,4 +1,9 @@
+// 🎨 Paleta de colores para los sprinkles
+$colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
+
 .card {
+  position: relative;
+  z-index: 1;
   background: #fff;
   border-radius: 1rem;
   padding: 2rem;
@@ -21,6 +26,14 @@
   margin: 0.5rem 0;
   font-size: 2rem;
   color: #333;
+}
+
+.name {
+  font-size: 2.3rem;
+  margin: 1rem 0;
+  color: #333;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(231, 158, 255, 0.2);
 }
 
 .text {
@@ -58,5 +71,54 @@
 
   &:hover {
     background-color: #d26ee3;
+  }
+}
+
+// 🌈 Sprinkles flotantes
+.wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+.sprinkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.sprinkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ff85d5; // fallback
+  animation: floatSprinkle 10s linear infinite;
+  opacity: 0.6;
+}
+
+// 🎉 Genera 20 sprinkles con colores aleatorios
+@for $i from 1 through 40 {
+  .sprinkle:nth-child(#{$i}) {
+    top: random(100) * 1%;
+    left: random(100) * 1%;
+    animation-delay: random(10) * 1s;
+    background-color: nth($colors, random(length($colors)));
+  }
+}
+
+@keyframes floatSprinkle {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
   }
 }
