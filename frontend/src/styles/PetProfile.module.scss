@@ -1,6 +1,8 @@
 // 🎨 Paleta de colores para los sprinkles
 $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 .card {
   position: relative;
   z-index: 1;
@@ -9,8 +11,14 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
   padding: 2rem;
   max-width: 400px;
   margin: 3rem auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 
 .avatar {
@@ -22,29 +30,51 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
   margin-bottom: 1rem;
 }
 
-.title {
-  margin: 0.5rem 0;
-  font-size: 2rem;
-  color: #333;
-}
-
 .name {
-  font-size: 2.3rem;
-  margin: 1rem 0;
-  color: #333;
-  font-weight: 700;
-  text-shadow: 1px 1px 2px rgba(231, 158, 255, 0.2);
+  font-size: 2.4rem;
+  margin: 1rem 0 0.5rem;
+  color: #2b2b2b;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .text {
-  margin: 0.3rem 0;
-  color: #666;
+  margin: 0.4rem 0;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 500;
+
+  strong {
+    color: #2b2b2b;
+    font-weight: 700;
+    margin-right: 0.3rem;
+  }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.badge {
+  background-color: #ffe0f0;
+  color: #6e006e;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .notes {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   font-style: italic;
-  color: #888;
+  font-size: 0.95rem;
+  color: #777;
+  line-height: 1.5;
 }
 
 .qr {
@@ -101,7 +131,7 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
   opacity: 0.6;
 }
 
-// 🎉 Genera 20 sprinkles con colores aleatorios
+// 🎉 Genera 40 sprinkles con colores aleatorios
 @for $i from 1 through 40 {
   .sprinkle:nth-child(#{$i}) {
     top: random(100) * 1%;

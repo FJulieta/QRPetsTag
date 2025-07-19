@@ -22,7 +22,7 @@
     padding: 1rem 1.5rem;
     border-left: 4px solid #e79eff;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(243, 241, 241, 0.878);
     font-style: italic;
     text-align: center;
 
@@ -55,7 +55,7 @@
     border-radius: 1rem;
     padding: 1.5rem;
     width: 260px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(196, 123, 12, 0.65);
     text-align: center;
     text-decoration: none;
     color: inherit;
@@ -114,6 +114,8 @@
     position: relative;
     z-index: 0;
     overflow: hidden;
+    min-height: 100vh;
+    background-color: #000;
 }
 
 .sprinkles {

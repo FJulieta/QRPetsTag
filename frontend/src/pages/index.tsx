@@ -22,8 +22,9 @@ export default function Home({ pets }: Props) {
             <div className={styles.container}>
                 <h1 className={styles.title}>🐾 Mis Mascotas 🐾</h1>
                 <p className={styles.subtitle}>
-                    📍 Escaneá su QR si se pierden, cada uno funciona como una credencial virtual de identificación.
+                    📍Hice esta aplicación con tecnología QR para que cada una de mis mascotas tenga su propia credencial digital. Al escanear el código que llevan en su chapita del collar, se accede a su perfil con información útil para que, si alguna vez se pierden, puedan contactarme y ayudarlos a volver a casa. 💜
                 </p>
+
 
                 <div className={styles.grid}>
                     {pets.map((pet) => (
