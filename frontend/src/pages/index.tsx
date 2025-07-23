@@ -3,6 +3,8 @@ import { Pet } from '../types/Pet';
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import QRCode from 'react-qr-code';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+
 
 interface Props {
     pets: Pet[];
@@ -11,14 +13,12 @@ interface Props {
 export default function Home({ pets }: Props) {
     return (
         <div className={styles.wrapper}>
-            {/* 🎉 Fondo decorativo con sprinkles */}
             <div className={styles.sprinkles}>
                 {Array.from({ length: 40 }).map((_, i) => (
                     <span key={i} className={styles.sprinkle}></span>
                 ))}
             </div>
 
-            {/* Contenido principal */}
             <div className={styles.container}>
                 <h1 className={styles.title}>🐾 Mis Mascotas 🐾</h1>
                 <p className={styles.subtitle}>

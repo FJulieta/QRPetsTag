@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+const { i18n, localePath, defaultNS } = require('./next-i18next.config');
 
-const nextConfig: NextConfig = {
-  /* config options here */
+module.exports = {
+  i18n,
+  localePath,
+  defaultNS,
 };
-
-export default nextConfig;

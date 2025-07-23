@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -141,8 +143,8 @@
 // Opcional: ajustá la cantidad acá si querés más/menos
 @for $i from 1 through 40 {
     .sprinkle:nth-child(#{$i}) {
-        top: random(100) * 1%;
-        left: random(100) * 1%;
+        top: math.random(100) * 1%;
+        left: math.random(100) * 1%;
         animation-delay: random(10) * 1s;
         background-color: nth((#ff85d5,
                     #e79eff,

@@ -1,17 +1,16 @@
 import { Pet } from '../types/Pet';
 import styles from '../styles/PetProfile.module.scss';
 
+
 export default function PetProfile({ pet }: { pet: Pet }) {
     return (
         <div className={styles.wrapper}>
-            {/* 🎉 Fondo decorativo con chispitas flotantes */}
             <div className={styles.sprinkles}>
                 {Array.from({ length: 100 }).map((_, i) => (
                     <span key={i} className={styles.sprinkle}></span>
                 ))}
             </div>
 
-            {/* 🐾 Tarjeta de perfil de mascota */}
             <div className={styles.card}>
                 <img src={pet.image} alt={pet.name} className={styles.avatar} />
 

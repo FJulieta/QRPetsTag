@@ -1,4 +1,6 @@
 // 🎨 Paleta de colores para los sprinkles
+@use "sass:math";
+
 $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -134,10 +136,10 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
 // 🎉 Genera 40 sprinkles con colores aleatorios
 @for $i from 1 through 40 {
   .sprinkle:nth-child(#{$i}) {
-    top: random(100) * 1%;
-    left: random(100) * 1%;
-    animation-delay: random(10) * 1s;
-    background-color: nth($colors, random(length($colors)));
+    top: math.random(100) * 1%;
+    left: math.random(100) * 1%;
+    animation-delay: math.random(10) * 1s;
+    background-color: nth($colors, math.random(length($colors)));
   }
 }
 
