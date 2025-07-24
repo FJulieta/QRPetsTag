@@ -2,7 +2,7 @@
 
 .body {
   background-color: #000;
-  color: #fff; // opcional para texto claro
+  color: #fff; 
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -11,4 +11,77 @@
 .a {
   color: inherit;
   text-decoration: none;
+}
+/* ===== Language Switcher (global) ===== */
+.lang-switch {
+  --bg: #ffe9f5;
+  --bg-active: #d6f5ff;
+  --thumb: #fff;
+  --border: #c9c9c9;
+  --shadow: 0 2px 6px rgba(0, 0, 0, .15);
+  --transition: .25s ease;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .35rem .9rem;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  font-family: inherit;
+  font-size: .85rem;
+  line-height: 1;
+  transition: background var(--transition), transform .1s;
+
+  &:hover { background: var(--bg-active); }
+  &:active { transform: scale(.98); }
+}
+
+.lang-switch__label {
+  opacity: .35;
+  font-weight: 600;
+  user-select: none;
+  transition: opacity var(--transition);
+}
+
+.lang-switch__paw {
+  font-size: 1rem;
+  margin-left: .1rem;
+  opacity: .7;
+}
+
+.lang-switch__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: .4rem;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 50%;
+  background: var(--thumb);
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  transition: left var(--transition), background var(--transition);
+  z-index: 2;
+
+  &[data-lang='en'] { left: calc(100% - 2.05rem); }
+}
+
+/* Resaltar el label activo según el thumb */
+.lang-switch__thumb[data-lang='es'] ~ .lang-switch__label--es { opacity: 1; }
+.lang-switch__thumb[data-lang='en'] ~ .lang-switch__label--en { opacity: 1; }
+
+/* Posicionamiento dentro de la card del perfil */
+.lang-btn {
+   position: absolute;
+  top: -1.2rem;    // súbelo más
+  right: -8rem;  // sácalo hacia la derecha
+  z-index: 5;
+  transform: scale(.9);
+
 }

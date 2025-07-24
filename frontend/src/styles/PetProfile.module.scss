@@ -7,6 +7,7 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
 
 .card {
   position: relative;
+  overflow: visible;
   z-index: 1;
   background: #fff;
   border-radius: 1rem;
@@ -20,6 +21,37 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
 
   &:hover {
     transform: translateY(-5px);
+  }
+}
+
+/* 🔘 Botón de idioma centrado arriba de la card, con profundidad */
+.langBtn {
+  position: absolute;
+  top: -0.8rem;                 // ajustá altura
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  /* Dimensión y efectos */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35), 0 0 0 2px rgba(255, 255, 255, .08) inset;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  transition: box-shadow .25s ease, transform .1s;
+
+  &:hover {
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .45), 0 0 0 2px rgba(255, 255, 255, .12) inset;
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  &:active {
+    transform: translateX(-50%) translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3), 0 0 0 2px rgba(255, 255, 255, .05) inset;
+  }
+
+  /* Si el botón es global (.lang-switch) */
+  :global(.lang-switch) {
+    display: inline-flex;
+    transform: none; // evita escalar doble
   }
 }
 
@@ -110,6 +142,10 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
 .wrapper {
   position: relative;
   z-index: 0;
+  min-height: 100vh;       // ocupa toda la pantalla
+  background: #000;        // fondo negro
+  padding: 4rem 1rem 3rem; // separa la card del borde
+  overflow: hidden;
 }
 
 .sprinkles {
@@ -148,7 +184,6 @@ $colors: (#ff85d5, #e79eff, #b8e4ff, #ff94a2, #ffe180);
     transform: translateY(0) rotate(0deg);
     opacity: 1;
   }
-
   100% {
     transform: translateY(-100vh) rotate(360deg);
     opacity: 0;
