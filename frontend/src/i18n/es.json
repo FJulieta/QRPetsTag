@@ -1,8 +1,8 @@
 {
   "home": {
     "title": "🐾 Mis Mascotas 🐾",
-    "description": "📍Hice esta aplicación con tecnología QR para que cada una de mis mascotas tenga su propia credencial digital. Al escanear el código que llevan en su chapita del collar, se accede a su perfil con información útil para que, si alguna vez se pierden, puedan contactarme y ayudarlos a volver a casa. 💜",
-    "qrNote": "📲 Escaneame si me perdí"
+    "description": "Hice esta aplicación con tecnología QR para que cada una de mis mascotas tenga su propia credencial digital. Al escanear el código que llevan en su chapita del collar, se accede a su perfil con información útil para que, si alguna vez se pierden, puedan contactarme y ayudarlos a volver a casa. 💜",
+    "qrNote": "Escaneame! 📲 "
   },
   "pet": {
     "age": "Edad",
@@ -13,6 +13,6 @@
     "personality": "Personalidad",
     "contact": "Contacto",
     "notes": "Notas",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "¡Contacta a mi humana!"
   }
 }

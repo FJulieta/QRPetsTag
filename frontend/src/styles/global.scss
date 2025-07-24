@@ -1,87 +1,96 @@
 @use "sass:math";
 
-.body {
-  background-color: #000;
-  color: #fff; 
+/* ---------------- Fonts ---------------- */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');   /* manuscrita p/ notes */
+
+/* ---------------- Root vars ---------------- */
+:root {
+  --font-title: 'Baloo 2', cursive;
+  --font-body : 'Nunito',  sans-serif;
+
+  --fs-h1 : clamp(2.2rem, 3vw + 1rem, 3.2rem);
+  --fs-h2 : clamp(1.6rem, 2vw + .9rem, 2.4rem);
+  --fs-base: clamp(.95rem, .5vw + .7rem, 1.05rem);
+}
+
+/* ---------------- Base ---------------- */
+html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  background:#000;
+  color:#fff;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
 }
 
-.a {
+a, a:visited, a:active {
   color: inherit;
   text-decoration: none;
 }
-/* ===== Language Switcher (global) ===== */
-.lang-switch {
-  --bg: #ffe9f5;
-  --bg-active: #d6f5ff;
-  --thumb: #fff;
-  --border: #c9c9c9;
-  --shadow: 0 2px 6px rgba(0, 0, 0, .15);
-  --transition: .25s ease;
 
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  padding: .35rem .9rem;
-  border-radius: 999px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  font-family: inherit;
-  font-size: .85rem;
-  line-height: 1;
-  transition: background var(--transition), transform .1s;
+.body { @extend body; }
+.a    { @extend a; }
 
-  &:hover { background: var(--bg-active); }
-  &:active { transform: scale(.98); }
+/* ---------------- Utils ---------------- */
+.font-title { font-family: var(--font-title); }
+.font-body  { font-family: var(--font-body); }
+
+.title-gradient{
+  background: linear-gradient(90deg,#e79eff 0%,#ff94a2 50%,#b8e4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.lang-switch__label {
-  opacity: .35;
-  font-weight: 600;
-  user-select: none;
-  transition: opacity var(--transition);
+/* ===== Language Switcher ===== */
+.lang-switch{
+  --bg:#ffe9f5; --bg-active:#d6f5ff; --thumb:#fff; --border:#c9c9c9;
+  --shadow:0 2px 6px rgba(0,0,0,.15); --transition:.25s ease;
+
+  position:relative; display:inline-flex; align-items:center; gap:.4rem;
+  padding:.35rem .9rem; border-radius:999px; background:var(--bg);
+  border:1px solid var(--border); cursor:pointer; box-shadow:var(--shadow);
+  font-size:.85rem; transition:background var(--transition), transform .1s;
+
+  &:hover{ background:var(--bg-active);} &:active{ transform:scale(.98);}
+}
+.lang-switch__label{ opacity:.35; font-weight:600; transition:opacity var(--transition);}
+.lang-switch__paw{ font-size:1rem; margin-left:.1rem; opacity:.7;}
+
+.lang-switch__thumb{
+  position:absolute; top:50%; left:.4rem; transform:translateY(-50%);
+  width:1.65rem; height:1.65rem; border-radius:50%; background:var(--thumb);
+  box-shadow:var(--shadow); display:grid; place-items:center; z-index:2;
+  transition:left var(--transition), background var(--transition);
+
+  &[data-lang='en']{ left:calc(100% - 2.05rem);}
+}
+.lang-switch__thumb[data-lang='es']~.lang-switch__label--es,
+.lang-switch__thumb[data-lang='en']~.lang-switch__label--en{ opacity:1;}
+
+/* botón flotante */
+.lang-btn{
+  position:absolute; top:-.8rem; left:50%; transform:translateX(-50%);
+  z-index:5; border-radius:999px; backdrop-filter:blur(4px);
+  box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 2px rgba(255,255,255,.08) inset;
+  transition:box-shadow .25s, transform .1s;
+
+  &:hover{
+    box-shadow:0 10px 22px rgba(0,0,0,.45),0 0 0 2px rgba(255,255,255,.12) inset;
+    transform:translateX(-50%) translateY(-2px);
+  }
+  &:active{
+    transform:translateX(-50%) translateY(0);
+    box-shadow:0 4px 12px rgba(0,0,0,.3),0 0 0 2px rgba(255,255,255,.05) inset;
+  }
+  .lang-switch{ transform:none; }
 }
 
-.lang-switch__paw {
-  font-size: 1rem;
-  margin-left: .1rem;
-  opacity: .7;
-}
-
-.lang-switch__thumb {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: .4rem;
-  width: 1.65rem;
-  height: 1.65rem;
-  border-radius: 50%;
-  background: var(--thumb);
-  box-shadow: var(--shadow);
-  display: grid;
-  place-items: center;
-  font-size: 1rem;
-  transition: left var(--transition), background var(--transition);
-  z-index: 2;
-
-  &[data-lang='en'] { left: calc(100% - 2.05rem); }
-}
-
-/* Resaltar el label activo según el thumb */
-.lang-switch__thumb[data-lang='es'] ~ .lang-switch__label--es { opacity: 1; }
-.lang-switch__thumb[data-lang='en'] ~ .lang-switch__label--en { opacity: 1; }
-
-/* Posicionamiento dentro de la card del perfil */
-.lang-btn {
-   position: absolute;
-  top: -1.2rem;    // súbelo más
-  right: -8rem;  // sácalo hacia la derecha
-  z-index: 5;
-  transform: scale(.9);
-
+/* ---------- RESPONSIVE (global tweaks) ---------- */
+@media (max-width: 480px){
+  :root{
+    --fs-h1: clamp(1.8rem, 6vw, 2.4rem);
+    --fs-h2: clamp(1.4rem, 4.5vw, 1.9rem);
+  }
 }

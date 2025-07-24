@@ -1,16 +1,18 @@
-import { GetServerSideProps } from 'next';
-import { Pet } from '../types/Pet';
-import styles from '../styles/Home.module.scss';
+// src/pages/index.tsx
+import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import QRCode from 'react-qr-code';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useT } from '../hooks/useT';
+import { Pet } from '../types/Pet';
+import styles from '../styles/Home.module.scss';
 
 interface Props {
   pets: Pet[];
+  baseUrl: string;
 }
 
-export default function Home({ pets }: Props) {
+const Home: NextPage<Props> = ({ pets, baseUrl }) => {
   const t = useT();
 
   return (
@@ -31,13 +33,16 @@ export default function Home({ pets }: Props) {
           {pets.map((pet) => (
             <div key={pet.id} className={styles.card}>
               <Link href={`/${pet.id}`} className={styles.cardLink}>
-                <img src={pet.image} alt={pet.name} className={styles.cardImage} />
+                <img
+                  src={pet.image}
+                  alt={pet.name}
+                  className={styles.cardImage}
+                />
                 <h2 className={styles.cardTitle}>{pet.name}</h2>
-                <p className={styles.cardText}>{pet.breed}</p>
               </Link>
 
               <div className={styles.qrSection}>
-                <QRCode value={`http://localhost:3000/${pet.id}`} size={120} />
+                <QRCode value={`${baseUrl}/${pet.id}`} size={120} />
                 <p className={styles.qrNote}>{t('home.qrNote')}</p>
               </div>
             </div>
@@ -46,12 +51,27 @@ export default function Home({ pets }: Props) {
       </div>
     </div>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const lang = ctx.req.cookies.lang === 'en' ? 'en' : 'es';
-  const res = await fetch(`http://localhost:3002/pets?lang=${lang}`);
+
+  // Detectá el host para armar el QR (o usa env var)
+  const host =
+    ctx.req.headers['x-forwarded-host'] ||
+    ctx.req.headers.host ||
+    'localhost:3000';
+  const protocol =
+    (ctx.req.headers['x-forwarded-proto'] as string) || 'http';
+  const baseUrl = `${protocol}://${host}`;
+
+  const apiBase =
+    process.env.API_URL || 'http://localhost:3002';
+
+  const res = await fetch(`${apiBase}/pets?lang=${lang}`);
   const pets = await res.json();
 
-  return { props: { pets } };
+  return { props: { pets, baseUrl } };
 };
+
+export default Home;

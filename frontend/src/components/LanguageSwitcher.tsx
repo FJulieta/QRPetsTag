@@ -1,9 +1,7 @@
-import { useI18n } from '../context/I18nContext';
+// src/components/LanguageSwitcher.tsx
 import { useRouter } from 'next/router';
-
-function setLangCookie(lang: 'es' | 'en') {
-  document.cookie = `lang=${lang}; path=/; max-age=31536000; samesite=lax`;
-}
+import Cookies from 'js-cookie';
+import { useI18n } from '../context/I18nContext';
 
 export default function LanguageSwitcher() {
   const { locale, setLocale } = useI18n();
@@ -11,14 +9,17 @@ export default function LanguageSwitcher() {
 
   const toggle = async () => {
     const newLocale = locale === 'es' ? 'en' : 'es';
-    setLocale(newLocale);         // mueve el thumb
-    setLangCookie(newLocale);     // para SSR
-    await router.replace(router.asPath, undefined, { scroll: false });
-    // sin reload ⇒ una sola animación
+    setLocale(newLocale);                           // mueve thumb + contexto
+    Cookies.set('lang', newLocale, { expires: 365, sameSite: 'lax' }); // SSR
+    await router.replace(router.asPath, undefined, { scroll: false }); // no reload
   };
 
   return (
-    <button className="lang-switch" onClick={toggle} aria-label="Toggle language">
+    <button
+      className="lang-switch"
+      onClick={toggle}
+      aria-label="Toggle language"
+    >
       <span className="lang-switch__thumb" data-lang={locale}>
         {locale === 'es' ? '🇦🇷' : '🇺🇸'}
       </span>

@@ -1,8 +1,8 @@
 {
   "home": {
     "title": "🐾 My Pets 🐾",
-    "description": "📍I made this app with QR technology so each pet has its own digital ID. By scanning the tag on their collar, you can access their profile with helpful information in case they get lost. 💜",
-    "qrNote": "📲 Scan me if I'm lost."
+    "description": "I made this app with QR technology so each pet has its own digital ID. By scanning the tag on their collar, you can access their profile with helpful information in case they get lost. 💜",
+    "qrNote": " Scan me! 📲"
   },
   "pet": {
     "age": "Age",
@@ -13,6 +13,7 @@
     "personality": "Personality",
     "contact": "Contact",
     "notes": "Notes",
-    "whatsapp": "WhatsApp"
+     "whatsapp": "Contact my human!"
+
   }
 }
