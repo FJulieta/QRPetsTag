@@ -15,12 +15,12 @@ type Ctx = {
 const STORAGE_KEY = 'lang';
 const I18nContext = createContext<Ctx | undefined>(undefined);
 
-const getByPath = (obj: Record<string, any>, path: string): string => {
+const getByPath = (obj: unknown, path: string): string => {
   return path
     .split('.')
-    .reduce<Record<string, any> | string>((acc, key) => {
+    .reduce<unknown>((acc, key) => {
       if (typeof acc === 'object' && acc !== null && key in acc) {
-        return acc[key];
+        return (acc as Record<string, unknown>)[key];
       }
       return '';
     }, obj) as string;
