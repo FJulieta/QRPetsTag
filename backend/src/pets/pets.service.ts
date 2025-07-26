@@ -79,7 +79,7 @@ export class PetsService {
           color: 'Negro',
           allergies: 'Ninguna',
           medication: 'Ninguna',
-          personality: 'Muy tranquilo, Cariñoso, Vago',
+          personality: 'Muy tranquilo, Cariñoso, Perezoso',
           notes: 'Le gusta dormir y correr con la pelota'
         }
       }

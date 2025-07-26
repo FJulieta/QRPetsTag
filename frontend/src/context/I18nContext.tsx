@@ -15,8 +15,16 @@ type Ctx = {
 const STORAGE_KEY = 'lang';
 const I18nContext = createContext<Ctx | undefined>(undefined);
 
-const getByPath = (obj: any, path: string): string =>
-  path.split('.').reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : ''), obj) || '';
+const getByPath = (obj: Record<string, any>, path: string): string => {
+  return path
+    .split('.')
+    .reduce<Record<string, any> | string>((acc, key) => {
+      if (typeof acc === 'object' && acc !== null && key in acc) {
+        return acc[key];
+      }
+      return '';
+    }, obj) as string;
+};
 
 /* --- provider --- */
 export function I18nProvider({
@@ -33,7 +41,6 @@ export function I18nProvider({
     Cookies.set('lang', l, { expires: 365, sameSite: 'lax' });
   }, []);
 
-  /* 1ª carga en cliente → lee localStorage o navigator */
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const saved = (localStorage.getItem(STORAGE_KEY) as Locale) || (Cookies.get('lang') as Locale);
