@@ -16,11 +16,10 @@ export default function MyApp({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  /* -------- loader de patitas -------- */
   useEffect(() => {
     let start = 0;
     const handleStart = () => { start = Date.now(); setLoading(true); };
-    const handleEnd   = () => {
+    const handleEnd = () => {
       const min = 800;
       const elapsed = Date.now() - start;
       if (elapsed < min) setTimeout(() => setLoading(false), min - elapsed);
@@ -31,9 +30,9 @@ export default function MyApp({
     router.events.on('routeChangeComplete', handleEnd);
     router.events.on('routeChangeError', handleEnd);
     return () => {
-      router.events.off('routeChangeStart',  handleStart);
+      router.events.off('routeChangeStart', handleStart);
       router.events.off('routeChangeComplete', handleEnd);
-      router.events.off('routeChangeError',   handleEnd);
+      router.events.off('routeChangeError', handleEnd);
     };
   }, [router]);
 
@@ -47,20 +46,25 @@ export default function MyApp({
 
 /* -------- Lee la cookie lang en SSR -------- */
 MyApp.getInitialProps = async (appCtx: AppContext) => {
-  // primero deja que Next resuelva los pageProps normales
   const appProps = await App.getInitialProps(appCtx);
 
-  // parseamos la cabecera cookie del request
-  const rawCookie = appCtx.ctx.req?.headers.cookie ?? '';
-  const parsed    = cookie.parse(rawCookie);
+  let initialLang: 'es' | 'en' = 'es';
 
-  const initialLang = parsed.lang === 'en' ? 'en' : 'es';
+  try {
+    const rawCookie = appCtx.ctx.req?.headers?.cookie ?? '';
+    const parsed = cookie.parse(rawCookie);
+    if (parsed.lang === 'en') {
+      initialLang = 'en';
+    }
+  } catch (error) {
+    // podés loguear el error si querés: console.error('Cookie parse error:', error);
+  }
 
   return {
     ...appProps,
     pageProps: {
       ...appProps.pageProps,
-      initialLang,               // <- se pasa al I18nProvider
+      initialLang,
     },
   };
 };
