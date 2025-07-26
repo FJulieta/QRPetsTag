@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { id } = ctx.params!;
   const lang = ctx.req.cookies.lang === 'en' ? 'en' : 'es';
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+  const baseUrl = process.env.API_URL || 'http://localhost:3002';
   const res = await fetch(`${baseUrl}/pets/${id}?lang=${lang}`);
   if (!res.ok) return { notFound: true };
 
