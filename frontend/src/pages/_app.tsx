@@ -1,4 +1,3 @@
-// src/pages/_app.tsx
 import type { AppProps, AppContext } from 'next/app';
 import App from 'next/app';
 import { useEffect, useState } from 'react';
@@ -57,7 +56,6 @@ MyApp.getInitialProps = async (appCtx: AppContext) => {
       initialLang = 'en';
     }
   } catch (error) {
-    // podés loguear el error si querés: console.error('Cookie parse error:', error);
   }
 
   return {

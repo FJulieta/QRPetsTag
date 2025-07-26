@@ -1,4 +1,3 @@
-// src/context/I18nContext.tsx
 import React, {
   createContext, useCallback, useContext, useEffect, useState,
 } from 'react';
